@@ -16,6 +16,7 @@ class SRTF {
       []; // New list to store time slices
 
   void srtfAlgo() {
+    timeSlices.clear();
     print('SRTF STARTED!!!');
     burstTime[nP] = 9999;
     int smallest, count = 0, time;
@@ -34,7 +35,7 @@ class SRTF {
       }
 
       // If the process changes, update the start time
-      if (prevProcess != -1 && prevProcess != smallest) {
+      if (prevProcess == -1 && prevProcess != smallest) {
         startTime = time;
       }
       prevProcess = smallest;
@@ -52,7 +53,7 @@ class SRTF {
             completionTime[smallest] - arrivalTime[smallest];
 
         // Record the time slice for the completed process
-        timeSlices.add([smallest, startTime, time + 1]);
+        timeSlices.add([smallest + 1, startTime, time + 1]);
         prevProcess = -1;
       }
 

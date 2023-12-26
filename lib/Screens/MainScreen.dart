@@ -6,7 +6,6 @@ import 'package:osassignment/Widget/DisplayWidgets/Title.dart';
 import 'package:osassignment/Widget/DisplayWidgets/data_table.dart';
 import 'package:osassignment/Widget/DisplayWidgets/displayResults.dart';
 import 'package:osassignment/Widget/InteractionWidgets/ProcessInputs.dart';
-
 import '../Algorithms/SRTF.dart';
 import '../Algorithms/nPSJF.dart';
 import '../Algorithms/rounRobin.dart';
@@ -14,7 +13,6 @@ import '../Widget/DisplayWidgets/GanttChart.dart';
 import '../Widget/InteractionWidgets/CustomDropDown.dart';
 import '../Widget/InteractionWidgets/ElevatedButton.dart';
 import '../Widget/InteractionWidgets/HorizontalInputs.dart';
-
 class MainScreen extends StatefulWidget {
   MainScreen({super.key});
 
@@ -52,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
       decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
         Color.fromARGB(255, 7, 22, 101),
-        Color.fromARGB(255, 39, 52, 133),
+        Color.fromARGB(255, 63, 77, 162),
       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
