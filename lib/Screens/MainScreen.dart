@@ -6,6 +6,7 @@ import 'package:osassignment/Widget/DisplayWidgets/Title.dart';
 import 'package:osassignment/Widget/DisplayWidgets/data_table.dart';
 import 'package:osassignment/Widget/DisplayWidgets/displayResults.dart';
 import 'package:osassignment/Widget/InteractionWidgets/ProcessInputs.dart';
+
 import '../Algorithms/SRTF.dart';
 import '../Algorithms/nPSJF.dart';
 import '../Algorithms/rounRobin.dart';
@@ -13,6 +14,7 @@ import '../Widget/DisplayWidgets/GanttChart.dart';
 import '../Widget/InteractionWidgets/CustomDropDown.dart';
 import '../Widget/InteractionWidgets/ElevatedButton.dart';
 import '../Widget/InteractionWidgets/HorizontalInputs.dart';
+
 class MainScreen extends StatefulWidget {
   MainScreen({super.key});
 

@@ -22,6 +22,7 @@ class RoundRobinAlgo {
   }
 
   List<List<int>> roundRobin() {
+    List<int> arrivalNotSorted = List.of(arrival);
     ganttChart.clear();
     arrival.sort((a, b) => a.compareTo(b));
     int timer = 0;
@@ -33,7 +34,7 @@ class RoundRobinAlgo {
     }
     queue[0] = 1;
     while (true) {
-      bool allProcessesCompleted = complete.every((element) => true);
+      bool allProcessesCompleted = complete.every((element) => element);
       bool tempBurstFinished = tempBurst.every((val) => val == 0);
       if (tempBurstFinished && allProcessesCompleted) break;
       for (int i = 0; (i < nP) && (queue[i] != 0); i++) {
@@ -53,7 +54,6 @@ class RoundRobinAlgo {
           turn[queue[0] - 1] = timer;
           finish[queue[0] - 1] = timer;
           complete[queue[0] - 1] = true;
-          print('block 4');
         }
         bool idle = queue[nP - 1] == 0
             ? queue
@@ -84,35 +84,19 @@ class RoundRobinAlgo {
     return [arrival, burst, finish, turn, wait];
   }
 
-  void onNumsSaved(String string) {
-    int n = int.parse(string);
-    nP = n;
-    arrival = List.filled(n, 0);
-    burst = List.filled(n, 0);
-    wait = List.filled(n, 0);
-    turn = List.filled(n, 0);
-    finish = List.filled(n, 0);
-    queue = List.filled(n, 0);
-    tempBurst = List.filled(n, 0);
-    complete = List.filled(n, false);
-    processed = List.filled(n, false);
-    for (int i = 0; i < nP; i++) {
-      complete[i] = false;
-      queue[i] = 0;
+  void queueUpdating(List<int> queue, int timer, List<int> arrival, int n,
+      int maxProcessIndex) {
+    int zeroIndex =
+        queue.indexOf(0); // Find the first empty position in the queue
+    if (zeroIndex != -1) {
+      // If there is an empty position, add the new process to it
+      queue[zeroIndex] = maxProcessIndex + 1;
+    } else {
+      // If the queue is full, remove the first process in the queue
+      queue.removeAt(0);
+      // Then add the new process to the end of the queue
+      queue.add(maxProcessIndex + 1);
     }
-  }
-
-  void intiTimeQuantom(String formTQ) {
-    tq = int.parse(formTQ);
-  }
-
-  void populateBurst(String n, int index) {
-    burst[index] = int.parse(n);
-    tempBurst[index] = burst[index];
-  }
-
-  void populateArrival(String s, int index) {
-    arrival[index] = int.parse(s);
   }
 
   int checkNewArrival(int timer, List<int> arrival, int n, int maxProcessIndex,
@@ -146,18 +130,34 @@ class RoundRobinAlgo {
     }
   }
 
-  void queueUpdating(List<int> queue, int timer, List<int> arrival, int n,
-      int maxProcessIndex) {
-    int zeroIndex =
-        queue.indexOf(0); // Find the first empty position in the queue
-    if (zeroIndex != -1) {
-      // If there is an empty position, add the new process to it
-      queue[zeroIndex] = maxProcessIndex + 1;
-    } else {
-      // If the queue is full, remove the first process in the queue
-      queue.removeAt(0);
-      // Then add the new process to the end of the queue
-      queue.add(maxProcessIndex + 1);
+  void intiTimeQuantom(String formTQ) {
+    tq = int.parse(formTQ);
+  }
+
+  void populateBurst(String n, int index) {
+    burst[index] = int.parse(n);
+    tempBurst[index] = burst[index];
+  }
+
+  void populateArrival(String s, int index) {
+    arrival[index] = int.parse(s);
+  }
+
+  void onNumsSaved(String string) {
+    int n = int.parse(string);
+    nP = n;
+    arrival = List.filled(n, 0);
+    burst = List.filled(n, 0);
+    wait = List.filled(n, 0);
+    turn = List.filled(n, 0);
+    finish = List.filled(n, 0);
+    queue = List.filled(n, 0);
+    tempBurst = List.filled(n, 0);
+    complete = List.filled(n, false);
+    processed = List.filled(n, false);
+    for (int i = 0; i < nP; i++) {
+      complete[i] = false;
+      queue[i] = 0;
     }
   }
 
