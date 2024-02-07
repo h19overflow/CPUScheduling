@@ -18,9 +18,9 @@ class SRTF {
   void srtfAlgo() {
     timeSlices.clear();
     print('SRTF STARTED!!!');
-    burstTime[nP] = 9999;
+    burstTime[nP] = 9999; // Assuming nP is the number of processes
     int smallest, count = 0, time;
-    double avg = 0, tt = 0, end;
+    double end;
     int prevProcess = -1;
     int startTime = 0;
 
@@ -34,14 +34,23 @@ class SRTF {
         }
       }
 
-      // If the process changes, update the start time
-      if (prevProcess == -1 && prevProcess != smallest) {
+      // Process change handling
+      if (prevProcess != smallest) {
+        if (prevProcess != -1) {
+          // Record the time slice for the previous process
+          timeSlices.add([prevProcess + 1, startTime, time]);
+        }
+        // Update the start time for the new process
         startTime = time;
       }
       prevProcess = smallest;
 
-      burstTime[smallest]--;
+      // Process execution
+      if (smallest != nP) {
+        burstTime[smallest]--;
+      }
 
+      // Process completion
       if (burstTime[smallest] == 0) {
         count++;
         end = time + 1;
